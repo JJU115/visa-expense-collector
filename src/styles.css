@@ -1,0 +1,9 @@
+.column-layout {
+    display:flex;
+    flex-direction: column;
+}/* You can add global styles to this file, and also import other style files */
+
+.row-layout {
+    display:flex;
+    flex-direction: row;
+}
