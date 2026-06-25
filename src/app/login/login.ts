@@ -20,6 +20,6 @@ export class Login {
     //Validate the form
 
     //Navigate
-    this.router.navigate(['/menu']);
+    this.router.navigate(['menu']);
   }
 }

@@ -1,1 +1,16 @@
-<p>submit-expense works!</p>
+<mat-toolbar>
+    <span>Submit an Expense</span>
+</mat-toolbar>
+
+<div class="column-layout">
+    <mat-form-field floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput [formField]="expenseForm.amount" type="number" class="example-right-align" placeholder="0" />
+        <span matTextPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput [formField]="expenseForm.description" />
+    </mat-form-field>
+</div>

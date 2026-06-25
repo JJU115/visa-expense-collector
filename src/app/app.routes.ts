@@ -6,11 +6,11 @@ import { SubmitExpense } from './submit-expense/submit-expense';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'login',
         component: Login
     },
     {
-        path: 'Menu',
+        path: 'menu',
         component: Menu
     },
     {
@@ -22,7 +22,7 @@ export const routes: Routes = [
         component: SubmitExpense
     },
     {
-        path: '*',
+        path: '**',
         component: Menu
     }
 ];

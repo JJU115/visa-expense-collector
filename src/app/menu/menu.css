@@ -1,0 +1,31 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.menu-card {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #b5cf8e;
+    color: white;
+}
+
+.scaled_icon {
+    transform: scale(2);
+}
+
+.icon-container {
+    display: flex;
+    justify-content: end; 
+    padding-right: 30px;
+    padding-bottom: 10px;
+}
+
+h2 {
+    margin-left: 15px;
+}

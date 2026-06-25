@@ -2,27 +2,40 @@
     <span>Username</span>
 </mat-toolbar>
 
-<div class="column-layout">
+<div class="menu-container">
+    <div class="column-layout" style="width: 85vw; gap: 10px; height: 50vh;">
+        <div class="row-layout" style="gap: 10px; height: 50%;">
+            <mat-card class="menu-card" matRipple (click)="router.navigate(['submit-expense'])">
+                <h2>Submit Expense</h2>
+                <div class="icon-container">
+                    <mat-icon class="scaled_icon">receipt_long</mat-icon>
+                </div>
+            </mat-card>
 
-    <div class="row-layout">
-        <mat-card class="card">
-            <span>Submit an Expense</span>
-        </mat-card>
+            <mat-card class="menu-card" matRipple (click)="router.navigate(['view-expenses'])">
+                <h2>View Expenses</h2>
+                <div class="icon-container">
+                    <mat-icon class="scaled_icon">library_books</mat-icon>
+                </div>
+            </mat-card>
+        </div>
+        <div class="row-layout" style="gap: 10px; height: 50%;">
+            <mat-card class="menu-card" matRipple (click)="router.navigate(['settings'])">
+                <h2>Settings</h2>
+                <div class="icon-container">
+                    <mat-icon class="scaled_icon">settings</mat-icon>
+                </div>
+            </mat-card>
 
-        <mat-card class="card">
-            <span>View Expenses</span>
-        </mat-card>
+            <mat-card class="menu-card" matRipple (click)="logout()">
+                <h2>Logout</h2>
+                <div class="icon-container">
+                    <mat-icon class="scaled_icon">exit_to_app</mat-icon>
+                </div>
+            </mat-card>
+        </div>
     </div>
 
-    <div class="row-layout">
-        <mat-card class="card">
-            <span>Settings</span>
-        </mat-card>
 
-        <mat-card class="card">
-            <span>Logout</span>
-        </mat-card>
-    </div>
 
 </div>
-
