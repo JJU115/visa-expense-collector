@@ -3,10 +3,21 @@
 </mat-toolbar>
 
 <div class="column-layout">
-    <mat-form-field floatLabel="always">
+    <mat-form-field>
         <mat-label>Amount</mat-label>
-        <input matInput [formField]="expenseForm.amount" type="number" class="example-right-align" placeholder="0" />
+        <input matInput [formField]="expenseForm.amountDollars" type="number" />
         <span matTextPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput [formField]="expenseForm.amountCents" type="number" />
+        <span matTextPrefix>$&nbsp;</span>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Date</mat-label>
+        <input matInput [formField]="expenseForm.date" type="date" />
     </mat-form-field>
 
     <mat-form-field>
