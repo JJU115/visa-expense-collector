@@ -1,27 +1,143 @@
 <mat-toolbar>
-    <span>Submit an Expense</span>
+    <button matIconButton (click)="location.back()">
+        <mat-icon style="color: white;">arrow_circle_left</mat-icon>
+    </button>
+    <span style="padding-left: 15px;">Submit an Expense</span>
 </mat-toolbar>
 
-<div class="column-layout">
-    <mat-form-field>
-        <mat-label>Amount</mat-label>
-        <input matInput [formField]="expenseForm.amountDollars" type="number" />
-        <span matTextPrefix>$&nbsp;</span>
-    </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Amount</mat-label>
-        <input matInput [formField]="expenseForm.amountCents" type="number" />
-        <span matTextPrefix>$&nbsp;</span>
-    </mat-form-field>
+<mat-stepper [orientation]="'vertical'" #stepper>
+    <mat-step [stepControl]="basicAmountForm">
+        <form [formGroup]="basicAmountForm">
+        <ng-template matStepLabel>Basic Amounts</ng-template>
 
-    <mat-form-field>
-        <mat-label>Date</mat-label>
-        <input matInput [formField]="expenseForm.date" type="date" />
-    </mat-form-field>
+        <div class="row-layout" style="align-items: baseline;">
+            <mat-icon>attach_money</mat-icon>
+            <mat-form-field style="flex-grow: 0.25">
+            <mat-label>Pre-Tax Amount</mat-label>
+                <input matInput formControlName="preTaxAmount"/>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput [formField]="expenseForm.description" />
-    </mat-form-field>
-</div>
+        </div>
+        
+        <div class="row-layout" style="align-items: baseline;">
+            <mat-icon>attach_money</mat-icon>
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>PST</mat-label>
+                <input matInput formControlName="pst" />
+            </mat-form-field>
+        </div>
+        
+        <div class="row-layout" style="align-items: baseline;">
+            <mat-icon>attach_money</mat-icon>
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>GST</mat-label>
+                <input matInput formControlName="gst" />
+            </mat-form-field>
+        </div>
+        
+        <div>
+            <button matButton matStepperNext>Next</button>
+        </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="otherAmountsForm">
+        <form [formGroup]="otherAmountsForm">
+        <ng-template matStepLabel>Other Amounts</ng-template>
+
+        <div class="row-layout" style="align-items: baseline;">
+            <mat-icon>attach_money</mat-icon>
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>Other/Liqour Tax</mat-label>
+                <input matInput formControlName="otherTax" />
+            </mat-form-field>
+        </div>
+        
+        <div class="row-layout" style="align-items: baseline;">
+            <mat-icon>attach_money</mat-icon>
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>Tips</mat-label>
+                <input matInput formControlName="tips" />
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button matButton matStepperNext>Next</button>
+        </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="accountingInfoForm">
+        <form [formGroup]="accountingInfoForm">
+        <ng-template matStepLabel>Accounting Info</ng-template>
+
+        <div class="row-layout">
+            <mat-form-field style="flex-grow: 1">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                @for (category of qboCategoryList; track category) {
+                <mat-option [value]="category">{{category}}</mat-option>
+                }
+            </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <div class="row-layout">
+            <mat-form-field style="flex-grow: 1">
+            <mat-label>Customer/Project</mat-label>
+            <mat-select formControlName="customerProject">
+                @for (customerProject of qboCustomerProjectList; track customerProject) {
+                <mat-option [value]="customerProject">{{customerProject}}</mat-option>
+                }
+            </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row-layout">
+            <mat-form-field style="flex-grow: 1">
+            <mat-label>QBO Class</mat-label>
+            <mat-select formControlName="qboClass">
+                @for (qboClass of qboClassList; track qboClass) {
+                <mat-option [value]="qboClass">{{qboClass}}</mat-option>
+                }
+            </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <div>
+            <button matButton matStepperNext>Next</button>
+        </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="additionalInfoForm">
+        <form [formGroup]="additionalInfoForm">
+        <ng-template matStepLabel>Date and Description</ng-template>
+
+        <div class="row-layout">
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>Date of Expense</mat-label>
+                <input matInput formControlName="date" [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>    
+        </div>
+        
+        <div class="row-layout">
+            <mat-form-field style="flex-grow: 0.25">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" rows="5"></textarea>
+            </mat-form-field>
+        </div>
+
+        
+
+        <div>
+            <button matButton>Submit</button>
+        </div>
+        </form>
+    </mat-step>
+
+</mat-stepper>
