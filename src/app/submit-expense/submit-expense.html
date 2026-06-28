@@ -11,6 +11,9 @@
         <form [formGroup]="basicAmountForm">
         <ng-template matStepLabel>Basic Amounts</ng-template>
 
+        <h4>Enter the <i>pre-tax amount</i></h4>
+            <h4>PST and GST if applicable</h4>
+
         <div class="row-layout" style="align-items: baseline;">
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
@@ -46,6 +49,8 @@
         <form [formGroup]="otherAmountsForm">
         <ng-template matStepLabel>Other Amounts</ng-template>
 
+        <h4>Enter additional amounts if applicable</h4>
+
         <div class="row-layout" style="align-items: baseline;">
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
@@ -72,8 +77,13 @@
         <form [formGroup]="accountingInfoForm">
         <ng-template matStepLabel>Accounting Info</ng-template>
 
+        <div class="row-layout" style="flex-grow: 0.25; align-items: center;">
+            <span>Enter categorization information for accounting purposes</span>
+            <button matIconButton><mat-icon>help</mat-icon></button>
+        </div>
+
         <div class="row-layout">
-            <mat-form-field style="flex-grow: 1">
+            <mat-form-field style="flex-grow: 0.25">
             <mat-label>Category</mat-label>
             <mat-select formControlName="category">
                 @for (category of qboCategoryList; track category) {
@@ -84,7 +94,7 @@
         </div>
         
         <div class="row-layout">
-            <mat-form-field style="flex-grow: 1">
+            <mat-form-field style="flex-grow: 0.25">
             <mat-label>Customer/Project</mat-label>
             <mat-select formControlName="customerProject">
                 @for (customerProject of qboCustomerProjectList; track customerProject) {
@@ -95,7 +105,7 @@
         </div>
 
         <div class="row-layout">
-            <mat-form-field style="flex-grow: 1">
+            <mat-form-field style="flex-grow: 0.25">
             <mat-label>QBO Class</mat-label>
             <mat-select formControlName="qboClass">
                 @for (qboClass of qboClassList; track qboClass) {
@@ -115,19 +125,23 @@
         <form [formGroup]="additionalInfoForm">
         <ng-template matStepLabel>Date and Description</ng-template>
 
+
         <div class="row-layout">
             <mat-form-field style="flex-grow: 0.25">
-                <mat-label>Date of Expense</mat-label>
-                <input matInput formControlName="date" [matDatepicker]="picker">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>    
+            </mat-form-field>
         </div>
+        
+        <h5>Provide any notes and attachments if necessary</h5>
+        <br>
+        <span>File select goes here</span>
         
         <div class="row-layout">
             <mat-form-field style="flex-grow: 0.25">
-                <mat-label>Description</mat-label>
+                <mat-label>Description/Notes</mat-label>
                 <textarea matInput formControlName="description" rows="5"></textarea>
             </mat-form-field>
         </div>
@@ -135,7 +149,7 @@
         
 
         <div>
-            <button matButton>Submit</button>
+            <button matButton (click)="submitExpenseForm()">Submit</button>
         </div>
         </form>
     </mat-step>

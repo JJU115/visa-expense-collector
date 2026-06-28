@@ -5,16 +5,17 @@ import { MatInputModule } from '@angular/material/input';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FormGroup, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
 import { MatIcon } from "@angular/material/icon";
 import {Location} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-submit-expense',
   imports: [MatToolbarModule, 
-    MatFormFieldModule, MatInputModule, MatStepperModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule, MatIcon, MatSelectModule],
+    MatFormFieldModule, MatInputModule, MatStepperModule, ReactiveFormsModule, MatButtonModule, MatIcon, MatSelectModule, MatDatepickerModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './submit-expense.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -22,7 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 })
 export class SubmitExpense {
 
-  constructor(public location: Location) {}
+  constructor(public location: Location, public snackBar: MatSnackBar) {}
 
   basicAmountForm = new FormGroup({
     preTaxAmount: new FormControl(),
@@ -46,7 +47,15 @@ export class SubmitExpense {
   });
 
   additionalInfoForm = new FormGroup({
-    description: new FormControl(''),
-    date: new FormControl(new Date())
+    date: new FormControl(new Date()),
+    description: new FormControl('')
   });
+
+
+
+  submitExpenseForm() {
+    this.snackBar.open('Expense submitted successfully!', 'Close', {
+      duration: 3000, // Duration in milliseconds
+    });
+  }
 }
