@@ -48,7 +48,7 @@ export class SubmitExpense implements OnInit {
     tips: new FormControl<string>('')
   });
 
-  qboCategoryList = ['category1', 'category2', 'category3'];
+  qboCategoryList = ['category1', 'category2', 'category3', 'Meals & Entertainment'];
   qboCustomerProjectList = ['project1', 'project2', 'project3'];
   qboClassList = Object.values(QBOClass);
 
@@ -57,7 +57,7 @@ export class SubmitExpense implements OnInit {
   accountingInfoForm = new FormGroup({
     isProjectExpense: new FormControl<boolean>(false),
     category: new FormControl<string>('', [Validators.required]),
-    mealType: new FormControl<string>(''),   
+    claimableMealType: new FormControl<boolean>(false),   
     customerProject: new FormControl<string>(''), //Only for project related expenses
     qboClass: new FormControl<QBOClass | null>(QBOClass.Solar) //If project expense, then this will always be 'Projects'
   });
@@ -70,7 +70,7 @@ export class SubmitExpense implements OnInit {
     description: new FormControl('')
   });
 
-  isMealsAndEntertainment: boolean = false;
+  isMealCategory: boolean = false;
   isProjectExpense: boolean = false;
   accountingInfoSubscription!: Subscription;
 
@@ -95,23 +95,27 @@ export class SubmitExpense implements OnInit {
         }
       }
 
-      if (value.category?.toLocaleLowerCase().includes('meals & entertainment') && !this.isMealsAndEntertainment) { 
-        this.accountingInfoForm.get('mealType')?.enable({ emitEvent: false });
-        this.isMealsAndEntertainment = true;
-      } else if (this.isMealsAndEntertainment) {
-        this.accountingInfoForm.get('mealType')?.disable({ emitEvent: false });
-        this.isMealsAndEntertainment = false;
-      }
+      this.isMealCategory = value.category?.toLocaleLowerCase().includes('meals & entertainment') || false;
       
       this.accountingInfoForm.updateValueAndValidity({ emitEvent: false });
     });
   }
 
-
+  
 
   submitExpenseForm() {
     this.snackBar.open('Expense submitted successfully!', 'Close', {
       duration: 3000, // Duration in milliseconds
     });
+  }
+
+
+  forbidNonNumericInput(event: any) {
+    const input = event.target;
+    const value = input.value;
+    const numericValue = value.replace(/[^0-9.]/g, '');
+    if (numericValue !== value) {
+      input.value = numericValue;
+    }
   }
 }

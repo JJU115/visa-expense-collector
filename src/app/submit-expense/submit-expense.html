@@ -11,14 +11,13 @@
         <form [formGroup]="basicAmountForm">
         <ng-template matStepLabel>Basic Amounts</ng-template>
 
-        <h4>Enter the <i>pre-tax amount</i></h4>
-            <h4>PST and GST if applicable</h4>
+        <h4>Enter the <i>pre-tax amount</i> and any PST or GST</h4>
 
         <div class="row-layout" style="align-items: baseline;">
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
             <mat-label>Pre-Tax Amount</mat-label>
-                <input matInput formControlName="preTaxAmount"/>
+                <input matInput formControlName="preTaxAmount" (input)="forbidNonNumericInput($event)"/>
             </mat-form-field>
 
         </div>
@@ -27,7 +26,7 @@
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
                 <mat-label>PST</mat-label>
-                <input matInput formControlName="pst" />
+                <input matInput formControlName="pst" (input)="forbidNonNumericInput($event)"/>
             </mat-form-field>
         </div>
         
@@ -35,7 +34,7 @@
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
                 <mat-label>GST</mat-label>
-                <input matInput formControlName="gst" />
+                <input matInput formControlName="gst" (input)="forbidNonNumericInput($event)"/>
             </mat-form-field>
         </div>
         
@@ -55,7 +54,7 @@
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
                 <mat-label>Other/Liqour Tax</mat-label>
-                <input matInput formControlName="otherTax" />
+                <input matInput formControlName="otherTax" (input)="forbidNonNumericInput($event)"/>
             </mat-form-field>
         </div>
         
@@ -63,7 +62,7 @@
             <mat-icon>attach_money</mat-icon>
             <mat-form-field style="flex-grow: 0.25">
                 <mat-label>Tips</mat-label>
-                <input matInput formControlName="tips" />
+                <input matInput formControlName="tips" (input)="forbidNonNumericInput($event)"/>
             </mat-form-field>
         </div>
 
@@ -99,10 +98,12 @@
             </mat-form-field>
         </div>
 
-        @if (isMealsAndEntertainment) {
-            <div class="row-layout">
-                
-            </div>
+        @if (isMealCategory) {
+            <label>Was this a restaurant meal or takeout food/drink?</label>
+            <mat-radio-group formControlName="claimableMealType" aria-label="Select an option">
+                <mat-radio-button [value]="true">Yes</mat-radio-button>
+                <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
         }
         
         @if (isProjectExpense) {
@@ -140,6 +141,7 @@
         <ng-template matStepLabel>Date and Description</ng-template>
 
 
+        <h5>What was the date of the expense?</h5>
         <div class="row-layout">
             <mat-form-field style="flex-grow: 0.25">
                 <mat-label>Date</mat-label>

@@ -3,6 +3,7 @@ import { Login } from './login/login';
 import { Menu } from './menu/menu';
 import { ExpenseList } from './expense-list/expense-list';
 import { SubmitExpense } from './submit-expense/submit-expense';
+import { Settings } from './settings/settings';
 
 export const routes: Routes = [
     {
@@ -12,6 +13,10 @@ export const routes: Routes = [
     {
         path: 'menu',
         component: Menu
+    },
+    {
+        path: 'settings',
+        component: Settings
     },
     {
         path: 'expense-list',
