@@ -82,6 +82,12 @@
             <button matIconButton><mat-icon>help</mat-icon></button>
         </div>
 
+        <label>Is this a project related expense?</label>
+        <mat-radio-group formControlName="isProjectExpense" aria-label="Select an option">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+
         <div class="row-layout">
             <mat-form-field style="flex-grow: 0.25">
             <mat-label>Category</mat-label>
@@ -92,8 +98,15 @@
             </mat-select>
             </mat-form-field>
         </div>
+
+        @if (isMealsAndEntertainment) {
+            <div class="row-layout">
+                
+            </div>
+        }
         
-        <div class="row-layout">
+        @if (isProjectExpense) {
+            <div class="row-layout">
             <mat-form-field style="flex-grow: 0.25">
             <mat-label>Customer/Project</mat-label>
             <mat-select formControlName="customerProject">
@@ -103,17 +116,18 @@
             </mat-select>
             </mat-form-field>
         </div>
-
-        <div class="row-layout">
-            <mat-form-field style="flex-grow: 0.25">
-            <mat-label>QBO Class</mat-label>
-            <mat-select formControlName="qboClass">
-                @for (qboClass of qboClassList; track qboClass) {
-                <mat-option [value]="qboClass">{{qboClass}}</mat-option>
-                }
-            </mat-select>
-            </mat-form-field>
-        </div>
+        } @else {
+            <div class="row-layout">
+                <mat-form-field style="flex-grow: 0.25">
+                <mat-label>QBO Class</mat-label>
+                <mat-select formControlName="qboClass">
+                    @for (qboClass of qboClassList; track qboClass) {
+                    <mat-option [value]="qboClass">{{qboClass}}</mat-option>
+                    }
+                </mat-select>
+                </mat-form-field>
+            </div>
+        }
         
         <div>
             <button matButton matStepperNext>Next</button>
